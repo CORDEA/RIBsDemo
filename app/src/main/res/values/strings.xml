@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">RIBsDemo</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Login</string>
+
+    <string name="hint_username">Username</string>
+    <string name="hint_api_key">API Key</string>
+
+    <string name="title_activity_region_detail">Detail of region</string>
+
+    <string name="text_enable">Enable</string>
+    <string name="text_disable">Disable</string>
+
+    <string name="nav_region">Regions</string>
+    <string name="nav_app">Applications</string>
 </resources>
