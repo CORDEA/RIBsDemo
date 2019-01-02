@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login)
+        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.login_rib)
 
         binding.content.apiKey.editText!!
             .textChanges()

@@ -9,7 +9,7 @@
         android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ui.login.LoginActivity"
-        tools:showIn="@layout/activity_login">
+        tools:showIn="@layout/login_rib">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/api_key"

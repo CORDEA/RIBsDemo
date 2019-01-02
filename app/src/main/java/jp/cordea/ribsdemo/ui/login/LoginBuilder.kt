@@ -22,7 +22,7 @@ class LoginBuilder(
             .loginRouter()
 
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoginView =
-        inflater.inflate(R.layout.activity_login, parentViewGroup, false) as LoginView
+        inflater.inflate(R.layout.login_rib, parentViewGroup, false) as LoginView
 
     interface ParentComponent
 
