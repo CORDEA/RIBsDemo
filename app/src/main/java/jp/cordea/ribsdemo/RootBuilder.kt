@@ -7,6 +7,7 @@ import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
+import jp.cordea.ribsdemo.ui.login.LoginBuilder
 
 class RootBuilder(
     dependency: ParentComponent
@@ -33,7 +34,7 @@ class RootBuilder(
             @JvmStatic
             @RootScope
             fun provideRouter(component: Component, view: RootView, interactor: RootInteractor) =
-                RootRouter(view, interactor, component)
+                RootRouter(view, interactor, component, LoginBuilder(component))
         }
 
         @Binds
@@ -46,7 +47,7 @@ class RootBuilder(
         modules = [Module::class],
         dependencies = [ParentComponent::class]
     )
-    interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent {
+    interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent, LoginBuilder.ParentComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance
