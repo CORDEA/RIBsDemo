@@ -70,6 +70,9 @@ dependencies {
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
     implementation 'com.xwray:groupie-databinding:2.3.0'
 
+    kapt 'com.uber.rib:rib-compiler-test:0.9.1'
+    implementation 'com.uber.rib:rib-android:0.9.1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
