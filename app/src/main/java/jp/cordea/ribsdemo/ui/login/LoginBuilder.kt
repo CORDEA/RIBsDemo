@@ -24,7 +24,9 @@ class LoginBuilder(
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoginView =
         inflater.inflate(R.layout.login_rib, parentViewGroup, false) as LoginView
 
-    interface ParentComponent
+    interface ParentComponent {
+        fun listener(): LoginInteractor.Listener
+    }
 
     @dagger.Module
     abstract class Module {

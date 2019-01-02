@@ -16,6 +16,9 @@ class LoginInteractor : Interactor<LoginInteractor.LoginPresenter, LoginRouter>(
     @Inject
     lateinit var presenter: LoginPresenter
 
+    @Inject
+    lateinit var listener: Listener
+
     private val compositeDisposable = CompositeDisposable()
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
@@ -23,7 +26,7 @@ class LoginInteractor : Interactor<LoginInteractor.LoginPresenter, LoginRouter>(
         presenter.clicks()
             .withLatestFrom(presenter.apiKeyChanges()) { _, key -> key }
             .filter { it.isNotBlank() }
-            .subscribeBy { }
+            .subscribeBy { listener.requestMain() }
             .addTo(compositeDisposable)
     }
 
@@ -35,5 +38,9 @@ class LoginInteractor : Interactor<LoginInteractor.LoginPresenter, LoginRouter>(
     interface LoginPresenter {
         fun apiKeyChanges(): Observable<String>
         fun clicks(): Observable<Unit>
+    }
+
+    interface Listener {
+        fun requestMain()
     }
 }

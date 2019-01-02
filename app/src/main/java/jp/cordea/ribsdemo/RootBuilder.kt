@@ -8,6 +8,8 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import jp.cordea.ribsdemo.ui.login.LoginBuilder
+import jp.cordea.ribsdemo.ui.login.LoginInteractor
+import jp.cordea.ribsdemo.ui.main.MainBuilder
 
 class RootBuilder(
     dependency: ParentComponent
@@ -34,12 +36,16 @@ class RootBuilder(
             @JvmStatic
             @RootScope
             fun provideRouter(component: Component, view: RootView, interactor: RootInteractor) =
-                RootRouter(view, interactor, component, LoginBuilder(component))
+                RootRouter(view, interactor, component, LoginBuilder(component), MainBuilder(component))
         }
 
         @Binds
         @RootScope
         abstract fun bindPresenter(view: RootView): RootInteractor.RootPresenter
+
+        @Binds
+        @RootScope
+        abstract fun bindListener(interactor: RootInteractor): LoginInteractor.Listener
     }
 
     @RootScope
@@ -47,7 +53,10 @@ class RootBuilder(
         modules = [Module::class],
         dependencies = [ParentComponent::class]
     )
-    interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent, LoginBuilder.ParentComponent {
+    interface Component : InteractorBaseComponent<RootInteractor>,
+        BuilderComponent,
+        LoginBuilder.ParentComponent,
+        MainBuilder.ParentComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance
