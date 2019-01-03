@@ -6,6 +6,8 @@ import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import jp.cordea.ribsdemo.R
 
 class MainView @JvmOverloads constructor(
@@ -15,6 +17,8 @@ class MainView @JvmOverloads constructor(
 ) : DrawerLayout(context, attrs, defStyleAttr),
     MainInteractor.MainPresenter,
     NavigationView.OnNavigationItemSelectedListener {
+
+    private val _navigationItemClicks = PublishSubject.create<Int>()
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -30,7 +34,11 @@ class MainView @JvmOverloads constructor(
         return false
     }
 
+    override fun navigationItemClicks(): Observable<Int> = _navigationItemClicks
+
     override fun onNavigationItemSelected(menu: MenuItem): Boolean {
+        _navigationItemClicks.onNext(menu.itemId)
+        closeDrawer(GravityCompat.START)
         return true
     }
 }
