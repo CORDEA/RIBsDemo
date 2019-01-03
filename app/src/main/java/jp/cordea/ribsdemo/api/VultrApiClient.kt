@@ -9,9 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class VultrApiClient @Inject constructor(
     private val manager: KeyManager,
     private val retrofitBuilder: Retrofit.Builder
