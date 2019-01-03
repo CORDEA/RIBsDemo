@@ -24,12 +24,14 @@ class MainInteractor : Interactor<MainInteractor.MainPresenter, MainRouter>() {
 
         presenter.navigationItemClicks()
             .subscribeBy {
+                router.detachRegion()
+                router.detachApp()
                 when (it) {
                     R.id.nav_region -> {
-                        router.detachRegion()
                         router.attachRegion()
                     }
                     R.id.nav_app -> {
+                        router.attachApp()
                     }
                 }
             }
