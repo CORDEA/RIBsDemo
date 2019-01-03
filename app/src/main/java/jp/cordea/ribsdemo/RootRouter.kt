@@ -1,16 +1,16 @@
 package jp.cordea.ribsdemo
 
+import android.content.Intent
 import com.uber.rib.core.ViewRouter
 import jp.cordea.ribsdemo.ui.login.LoginBuilder
 import jp.cordea.ribsdemo.ui.login.LoginRouter
-import jp.cordea.ribsdemo.ui.main.MainBuilder
+import jp.cordea.ribsdemo.ui.main.MainActivity
 
 class RootRouter(
     view: RootView,
     interactor: RootInteractor,
     component: RootBuilder.Component,
-    private val loginBuilder: LoginBuilder,
-    private val mainBuilder: MainBuilder
+    private val loginBuilder: LoginBuilder
 ) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
     private var loginRouter: LoginRouter? = null
 
@@ -28,9 +28,8 @@ class RootRouter(
         loginRouter = null
     }
 
-    fun attachMain() {
-        val router = mainBuilder.build(view)
-        attachChild(router)
-        view.addView(router.view)
+    fun navigateToMain() {
+        val context = view.context
+        context.startActivity(Intent(context, MainActivity::class.java))
     }
 }

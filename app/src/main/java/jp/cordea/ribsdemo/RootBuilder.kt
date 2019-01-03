@@ -36,7 +36,7 @@ class RootBuilder(
             @JvmStatic
             @RootScope
             fun provideRouter(component: Component, view: RootView, interactor: RootInteractor) =
-                RootRouter(view, interactor, component, LoginBuilder(component), MainBuilder(component))
+                RootRouter(view, interactor, component, LoginBuilder(component))
         }
 
         @Binds

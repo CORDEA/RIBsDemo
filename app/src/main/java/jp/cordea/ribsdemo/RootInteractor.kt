@@ -18,7 +18,7 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>(), L
 
     override fun requestMain() {
         router.detachLogin()
-        router.attachMain()
+        router.navigateToMain()
     }
 
     interface RootPresenter

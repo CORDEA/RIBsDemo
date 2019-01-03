@@ -15,5 +15,14 @@ class MainInteractor : Interactor<MainInteractor.MainPresenter, MainRouter>() {
         super.didBecomeActive(savedInstanceState)
     }
 
-    interface MainPresenter
+    override fun handleBackPress(): Boolean {
+        if (presenter.handleDrawer()) {
+            return true
+        }
+        return super.handleBackPress()
+    }
+
+    interface MainPresenter {
+        fun handleDrawer(): Boolean
+    }
 }
