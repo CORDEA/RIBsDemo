@@ -25,7 +25,7 @@ class MainBuilder(
             .mainRouter()
 
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): MainView =
-        inflater.inflate(R.layout.activity_main, parentViewGroup, false) as MainView
+        inflater.inflate(R.layout.main_ribs, parentViewGroup, false) as MainView
 
     interface ParentComponent
 

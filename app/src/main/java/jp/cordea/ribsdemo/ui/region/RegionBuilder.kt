@@ -24,7 +24,7 @@ class RegionBuilder(
             .regionRouter()
 
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): RegionView =
-        inflater.inflate(R.layout.fragment_region, parentViewGroup, false) as RegionView
+        inflater.inflate(R.layout.region_ribs, parentViewGroup, false) as RegionView
 
 
     interface ParentComponent {

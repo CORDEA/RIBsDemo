@@ -22,7 +22,7 @@ class AppBuilder(
             .appRouter()
 
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): AppView =
-        inflater.inflate(R.layout.fragment_app, parentViewGroup, false) as AppView
+        inflater.inflate(R.layout.app_ribs, parentViewGroup, false) as AppView
 
     interface ParentComponent
 
