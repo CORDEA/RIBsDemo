@@ -8,6 +8,7 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import jp.cordea.ribsdemo.R
+import jp.cordea.ribsdemo.ui.region.RegionBuilder
 
 class MainBuilder(
     component: ParentComponent
@@ -34,7 +35,7 @@ class MainBuilder(
             @JvmStatic
             @MainScope
             fun provideRouter(component: Component, view: MainView, interactor: MainInteractor) =
-                MainRouter(view, interactor, component)
+                MainRouter(view, interactor, component, RegionBuilder(component))
         }
 
         @Binds
@@ -47,7 +48,9 @@ class MainBuilder(
         modules = [Module::class],
         dependencies = [MainBuilder.ParentComponent::class]
     )
-    interface Component : InteractorBaseComponent<MainInteractor>, BuilderComponent {
+    interface Component : InteractorBaseComponent<MainInteractor>,
+        BuilderComponent,
+        RegionBuilder.ParentComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance

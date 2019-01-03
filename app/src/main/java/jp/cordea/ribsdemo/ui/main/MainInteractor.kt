@@ -13,6 +13,7 @@ class MainInteractor : Interactor<MainInteractor.MainPresenter, MainRouter>() {
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
+        router.attachRegion()
     }
 
     override fun handleBackPress(): Boolean {
