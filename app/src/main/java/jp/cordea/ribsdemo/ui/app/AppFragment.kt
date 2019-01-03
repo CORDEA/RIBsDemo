@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import dagger.android.support.AndroidSupportInjection
@@ -15,7 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import jp.cordea.ribsdemo.databinding.FragmentAppBinding
 import jp.cordea.ribsdemo.event.app.AppActionCreator
 import jp.cordea.ribsdemo.event.app.AppStore
 import javax.inject.Inject
@@ -34,7 +32,7 @@ class AppFragment : Fragment() {
     @Inject
     lateinit var creator: AppActionCreator
 
-    private lateinit var binding: FragmentAppBinding
+//    private lateinit var binding: FragmentAppBinding
 
     private val compositeDisposable = CompositeDisposable()
     private val adapter by lazy { GroupAdapter<ViewHolder>() }
@@ -48,18 +46,19 @@ class AppFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAppBinding.inflate(inflater, container, false)
-        binding.recyclerView.adapter = adapter
-        return binding.root
+    ): View? {
+//        binding = FragmentAppBinding.inflate(inflater, container, false)
+//        binding.recyclerView.adapter = adapter
+//        return binding.root
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.swipeRefresh
-            .refreshes()
-            .subscribeBy { creator.refresh() }
-            .addTo(compositeDisposable)
+//        binding.swipeRefresh
+//            .refreshes()
+//            .subscribeBy { creator.refresh() }
+//            .addTo(compositeDisposable)
 
         store.onReady()
             .observeOn(AndroidSchedulers.mainThread())
