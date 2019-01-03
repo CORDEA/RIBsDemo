@@ -15,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import jp.cordea.ribsdemo.databinding.FragmentRegionBinding
+//import jp.cordea.ribsdemo.databinding.FragmentRegionBinding
 import jp.cordea.ribsdemo.event.region.RegionActionCreator
 import jp.cordea.ribsdemo.event.region.RegionStore
 import javax.inject.Inject
@@ -37,7 +37,7 @@ class RegionFragment : Fragment() {
     @Inject
     lateinit var navigator: RegionNavigator
 
-    private lateinit var binding: FragmentRegionBinding
+//    private lateinit var binding: FragmentRegionBinding
 
     private val compositeDisposable = CompositeDisposable()
     private val adapter by lazy { GroupAdapter<ViewHolder>() }
@@ -52,17 +52,18 @@ class RegionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegionBinding.inflate(inflater, container, false)
-        binding.recyclerView.adapter = adapter
-        return binding.root
+//        binding = FragmentRegionBinding.inflate(inflater, container, false)
+//        binding.recyclerView.adapter = adapter
+//        return binding.root
+        return null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.swipeRefresh
-            .refreshes()
-            .subscribeBy { creator.refresh() }
-            .addTo(compositeDisposable)
+//        binding.swipeRefresh
+//            .refreshes()
+//            .subscribeBy { creator.refresh() }
+//            .addTo(compositeDisposable)
 
         store.onReady()
             .observeOn(AndroidSchedulers.mainThread())
