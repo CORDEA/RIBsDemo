@@ -1,5 +1,6 @@
 package jp.cordea.ribsdemo.ui.region
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.uber.rib.core.InteractorBaseComponent
@@ -8,6 +9,7 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import jp.cordea.ribsdemo.R
+import retrofit2.Retrofit
 
 class RegionBuilder(
     component: ParentComponent
@@ -25,7 +27,10 @@ class RegionBuilder(
         inflater.inflate(R.layout.fragment_region, parentViewGroup, false) as RegionView
 
 
-    interface ParentComponent
+    interface ParentComponent {
+        fun context(): Context
+        fun retrofitBuilder(): Retrofit.Builder
+    }
 
     @dagger.Module
     abstract class Module {
@@ -41,6 +46,9 @@ class RegionBuilder(
         @Binds
         @RegionScope
         abstract fun bindPresenter(view: RegionView): RegionInteractor.RegionPresenter
+
+        @Binds
+        abstract fun bindRegionDataSource(remoteDataSource: RegionRemoteDataSource): RegionDataSource
     }
 
     @RegionScope

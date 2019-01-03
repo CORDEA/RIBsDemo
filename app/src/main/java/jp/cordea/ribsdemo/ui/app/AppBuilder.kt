@@ -40,6 +40,9 @@ class AppBuilder(
         @Binds
         @AppScope
         abstract fun bindPresenter(view: AppView): AppInteractor.AppPresenter
+
+        @Binds
+        abstract fun bindAppDataSource(remoteDataSource: AppRemoteDataSource): AppDataSource
     }
 
     @AppScope

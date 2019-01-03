@@ -7,6 +7,7 @@ import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
+import jp.cordea.ribsdemo.AppModule
 import jp.cordea.ribsdemo.R
 import jp.cordea.ribsdemo.ui.app.AppBuilder
 import jp.cordea.ribsdemo.ui.region.RegionBuilder
@@ -37,6 +38,11 @@ class MainBuilder(
             @MainScope
             fun provideRouter(component: Component, view: MainView, interactor: MainInteractor) =
                 MainRouter(view, interactor, component, RegionBuilder(component), AppBuilder(component))
+
+            @Provides
+            @JvmStatic
+            @MainScope
+            fun provideContext(view: MainView) = view.context
         }
 
         @Binds
@@ -46,8 +52,8 @@ class MainBuilder(
 
     @MainScope
     @dagger.Component(
-        modules = [Module::class],
-        dependencies = [MainBuilder.ParentComponent::class]
+        modules = [Module::class, AppModule::class],
+        dependencies = [ParentComponent::class]
     )
     interface Component : InteractorBaseComponent<MainInteractor>,
         BuilderComponent,
@@ -61,7 +67,7 @@ class MainBuilder(
             @BindsInstance
             fun view(view: MainView): Builder
 
-            fun parentComponent(component: MainBuilder.ParentComponent): Builder
+            fun parentComponent(component: ParentComponent): Builder
 
             fun build(): Component
         }
