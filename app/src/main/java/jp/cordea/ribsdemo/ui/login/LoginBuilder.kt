@@ -37,6 +37,11 @@ class LoginBuilder(
             @LoginScope
             fun provideRouter(component: Component, view: LoginView, interactor: LoginInteractor) =
                 LoginRouter(view, interactor, component)
+
+            @Provides
+            @JvmStatic
+            @LoginScope
+            fun provideContext(view: LoginView) = view.context
         }
 
         @Binds

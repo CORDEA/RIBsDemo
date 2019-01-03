@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.withLatestFrom
+import jp.cordea.ribsdemo.KeyManager
 import javax.inject.Inject
 
 @RibInteractor
@@ -15,6 +16,9 @@ class LoginInteractor : Interactor<LoginInteractor.LoginPresenter, LoginRouter>(
 
     @Inject
     lateinit var presenter: LoginPresenter
+
+    @Inject
+    lateinit var keyManager: KeyManager
 
     @Inject
     lateinit var listener: Listener
@@ -26,6 +30,7 @@ class LoginInteractor : Interactor<LoginInteractor.LoginPresenter, LoginRouter>(
         presenter.clicks()
             .withLatestFrom(presenter.apiKeyChanges()) { _, key -> key }
             .filter { it.isNotBlank() }
+            .doOnNext { keyManager.set(it) }
             .subscribeBy { listener.requestMain() }
             .addTo(compositeDisposable)
     }

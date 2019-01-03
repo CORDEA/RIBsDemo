@@ -2,10 +2,10 @@ package jp.cordea.ribsdemo
 
 import android.content.Context
 import android.preference.PreferenceManager
+import jp.cordea.ribsdemo.ui.login.LoginScope
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@LoginScope
 class KeyManager @Inject constructor(
     private val context: Context
 ) {
