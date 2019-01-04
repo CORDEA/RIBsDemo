@@ -34,7 +34,7 @@ class RegionDetailBuilder(
             @JvmStatic
             @RegionDetailScope
             fun provideRouter(component: Component, view: RegionDetailView, interactor: RegionDetailInteractor) =
-                RegionDetailRouter(view, interactor, component)
+                RegionDetailRouter(view, interactor, component, RegionDetailChildBuilder(component))
         }
 
         @Binds
@@ -48,7 +48,8 @@ class RegionDetailBuilder(
         dependencies = [ParentComponent::class]
     )
     interface Component : InteractorBaseComponent<RegionDetailInteractor>,
-        BuilderComponent {
+        BuilderComponent,
+        RegionDetailChildBuilder.ParentComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance

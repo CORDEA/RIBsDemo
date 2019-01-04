@@ -11,15 +11,19 @@ class RegionDetailInteractor : Interactor<RegionDetailInteractor.RegionDetailPre
     @Inject
     lateinit var presenter: RegionDetailPresenter
 
+    lateinit var builder: RegionDetailChildBuilder
+
     var initialPosition: Int = 0
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
 
+        presenter.setAdapter(RegionDetailPagerAdapter(builder))
         presenter.moveTo(initialPosition)
     }
 
     interface RegionDetailPresenter {
+        fun setAdapter(adapter: RegionDetailPagerAdapter)
         fun moveTo(position: Int)
     }
 }
