@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
+import io.reactivex.Observable
 import jp.cordea.ribsdemo.R
 
 class RegionView @JvmOverloads constructor(
@@ -19,8 +21,14 @@ class RegionView @JvmOverloads constructor(
         findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter
     }
 
+    override fun swipeRefreshes(): Observable<Unit> = refreshes()
+
     override fun showItems(items: List<RegionItem>) {
         adapter.clear()
         adapter.addAll(items)
+    }
+
+    override fun completeUpdate() {
+        isRefreshing = false
     }
 }
