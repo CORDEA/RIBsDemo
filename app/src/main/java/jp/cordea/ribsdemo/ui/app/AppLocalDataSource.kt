@@ -3,9 +3,7 @@ package jp.cordea.ribsdemo.ui.app
 import io.reactivex.Maybe
 import jp.cordea.ribsdemo.api.response.Application
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class AppLocalDataSource @Inject constructor(
 ) : AppDataSource {
     private var apps: Collection<Application>? = null

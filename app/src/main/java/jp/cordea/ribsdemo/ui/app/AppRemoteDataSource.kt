@@ -4,9 +4,7 @@ import io.reactivex.Maybe
 import jp.cordea.ribsdemo.api.VultrApiClient
 import jp.cordea.ribsdemo.api.response.Application
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class AppRemoteDataSource @Inject constructor(
     private val apiClient: VultrApiClient
 ) : AppDataSource {

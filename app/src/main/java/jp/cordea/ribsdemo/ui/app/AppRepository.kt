@@ -4,9 +4,7 @@ import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import jp.cordea.ribsdemo.api.response.Application
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class AppRepository @Inject constructor(
     private val dataSource: AppDataSource,
     private val localDataSource: AppLocalDataSource

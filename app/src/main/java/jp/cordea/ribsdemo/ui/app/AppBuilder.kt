@@ -1,5 +1,6 @@
 package jp.cordea.ribsdemo.ui.app
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.uber.rib.core.InteractorBaseComponent
@@ -8,6 +9,7 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import jp.cordea.ribsdemo.R
+import retrofit2.Retrofit
 
 class AppBuilder(
     component: ParentComponent
@@ -24,7 +26,10 @@ class AppBuilder(
     override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): AppView =
         inflater.inflate(R.layout.app_ribs, parentViewGroup, false) as AppView
 
-    interface ParentComponent
+    interface ParentComponent {
+        fun context(): Context
+        fun retrofitBuilder(): Retrofit.Builder
+    }
 
     @dagger.Module
     abstract class Module {
