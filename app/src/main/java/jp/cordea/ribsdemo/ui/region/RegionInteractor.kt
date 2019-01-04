@@ -52,7 +52,7 @@ class RegionInteractor : Interactor<RegionInteractor.RegionPresenter, RegionRout
     }
 
     private fun Collection<Region>.toItems() =
-        map { itemFactory.create(RegionItemViewModel.from(it)) })
+        map { itemFactory.create(RegionItemViewModel.from(it)) }
 
     interface RegionPresenter {
         fun swipeRefreshes(): Observable<Unit>
