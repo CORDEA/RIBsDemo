@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.android.support.AndroidSupportInjection
 import jp.cordea.ribsdemo.api.response.Region
-import jp.cordea.ribsdemo.databinding.FragmentRegionDetailBinding
+
+//import jp.cordea.ribsdemo.databinding.FragmentRegionDetailBinding
 
 class RegionDetailFragment : Fragment() {
     companion object {
@@ -31,7 +32,7 @@ class RegionDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View =
-        FragmentRegionDetailBinding.inflate(inflater, container, false).apply {
-        }.root
+    ): View? = null
+//        FragmentRegionDetailBinding.inflate(inflater, container, false).apply {
+//        }.root
 }
