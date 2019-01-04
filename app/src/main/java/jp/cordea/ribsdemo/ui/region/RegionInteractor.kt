@@ -7,6 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import jp.cordea.ribsdemo.api.response.Region
 import javax.inject.Inject
 
@@ -44,6 +45,10 @@ class RegionInteractor : Interactor<RegionInteractor.RegionPresenter, RegionRout
             }, {
             })
             .addTo(compositeDisposable)
+
+        presenter.itemClicks()
+            .subscribeBy { router.navigateToDetail(it) }
+            .addTo(compositeDisposable)
     }
 
     override fun willResignActive() {
@@ -52,10 +57,11 @@ class RegionInteractor : Interactor<RegionInteractor.RegionPresenter, RegionRout
     }
 
     private fun Collection<Region>.toItems() =
-        map { itemFactory.create(RegionItemViewModel.from(it)) }
+        mapIndexed { index, region -> itemFactory.create(RegionItemViewModel.from(region), index) }
 
     interface RegionPresenter {
         fun swipeRefreshes(): Observable<Unit>
+        fun itemClicks(): Observable<Int>
         fun showItems(items: List<RegionItem>)
         fun completeUpdate()
     }
