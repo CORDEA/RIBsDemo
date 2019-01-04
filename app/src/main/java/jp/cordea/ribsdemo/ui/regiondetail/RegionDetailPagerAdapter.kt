@@ -14,8 +14,12 @@ class RegionDetailPagerAdapter(
             notifyDataSetChanged()
         }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any =
-        regionDetailChildBuilder.build(container).view
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val router = regionDetailChildBuilder.build(container)
+        router.interactor.region = items[position]
+        container.addView(router.view)
+        return router.view
+    }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
         container.removeView(obj as View)
