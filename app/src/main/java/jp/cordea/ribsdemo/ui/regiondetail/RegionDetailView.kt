@@ -11,4 +11,7 @@ class RegionDetailView @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
     }
+
+    override fun moveTo(position: Int) {
+    }
 }

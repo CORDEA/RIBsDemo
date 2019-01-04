@@ -18,12 +18,16 @@ class RegionDetailActivity : RibActivity() {
             }
     }
 
+    private lateinit var interactor: RegionDetailInteractor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-//        val position = intent.getIntExtra(POSITION_KEY, 0)
+        interactor.initialPosition = intent.getIntExtra(POSITION_KEY, 0)
     }
 
     override fun createRouter(parentViewGroup: ViewGroup): ViewRouter<*, *, *> =
-        RegionDetailBuilder(object : RegionDetailBuilder.ParentComponent {}).build(parentViewGroup)
+        RegionDetailBuilder(object : RegionDetailBuilder.ParentComponent {}).build(parentViewGroup).also {
+            interactor = it.interactor
+        }
 }
