@@ -6,7 +6,8 @@ import androidx.viewpager.widget.PagerAdapter
 import jp.cordea.ribsdemo.api.response.Region
 
 class RegionDetailPagerAdapter(
-    private val regionDetailChildBuilder: RegionDetailChildBuilder
+    private val onAttach: (container: ViewGroup, item: Region) -> View,
+    private val onDetach: (container: ViewGroup, item: Region) -> Unit
 ) : PagerAdapter() {
     var items: List<Region> = emptyList()
         set(value) {
@@ -14,15 +15,11 @@ class RegionDetailPagerAdapter(
             notifyDataSetChanged()
         }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val router = regionDetailChildBuilder.build(container)
-        router.interactor.region = items[position]
-        container.addView(router.view)
-        return router.view
-    }
+    override fun instantiateItem(container: ViewGroup, position: Int): Any =
+        onAttach(container, items[position])
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        container.removeView(obj as View)
+        onDetach(container, items[position])
     }
 
     override fun getCount(): Int = items.size

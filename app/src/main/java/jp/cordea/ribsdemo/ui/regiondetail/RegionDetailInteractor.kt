@@ -19,8 +19,6 @@ class RegionDetailInteractor : Interactor<RegionDetailInteractor.RegionDetailPre
     @Inject
     lateinit var repository: RegionRepository
 
-    lateinit var builder: RegionDetailChildBuilder
-
     var initialPosition: Int = 0
 
     private val compositeDisposable = CompositeDisposable()
@@ -28,7 +26,14 @@ class RegionDetailInteractor : Interactor<RegionDetailInteractor.RegionDetailPre
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
 
-        presenter.setAdapter(RegionDetailPagerAdapter(builder))
+        presenter.setAdapter(RegionDetailPagerAdapter(
+            onAttach = { container, item ->
+                router.attachChild(container, item)
+            },
+            onDetach = { container, item ->
+                router.detachChild(container, item)
+            }
+        ))
 
         repository.fetchRegion(false)
             .observeOn(AndroidSchedulers.mainThread())
