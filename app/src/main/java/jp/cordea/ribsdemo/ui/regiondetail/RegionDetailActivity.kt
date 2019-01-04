@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.ViewGroup
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
-import dagger.android.AndroidInjection
 
 class RegionDetailActivity : RibActivity() {
     companion object {
@@ -21,7 +20,6 @@ class RegionDetailActivity : RibActivity() {
     private lateinit var interactor: RegionDetailInteractor
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         interactor.initialPosition = intent.getIntExtra(POSITION_KEY, 0)
     }
