@@ -7,7 +7,10 @@ import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
+import jp.cordea.ribsdemo.AppModule
 import jp.cordea.ribsdemo.R
+import jp.cordea.ribsdemo.ui.region.RegionDataSource
+import jp.cordea.ribsdemo.ui.region.RegionRemoteDataSource
 
 class RegionDetailBuilder(
     component: ParentComponent
@@ -35,16 +38,24 @@ class RegionDetailBuilder(
             @RegionDetailScope
             fun provideRouter(component: Component, view: RegionDetailView, interactor: RegionDetailInteractor) =
                 RegionDetailRouter(view, interactor, component, RegionDetailChildBuilder(component))
+
+            @Provides
+            @JvmStatic
+            @RegionDetailScope
+            fun provideContext(view: RegionDetailView) = view.context
         }
 
         @Binds
         @RegionDetailScope
         abstract fun bindPresenter(view: RegionDetailView): RegionDetailInteractor.RegionDetailPresenter
+
+        @Binds
+        abstract fun bindRegionDataSource(remoteDataSource: RegionRemoteDataSource): RegionDataSource
     }
 
     @RegionDetailScope
     @dagger.Component(
-        modules = [Module::class],
+        modules = [Module::class, AppModule::class],
         dependencies = [ParentComponent::class]
     )
     interface Component : InteractorBaseComponent<RegionDetailInteractor>,

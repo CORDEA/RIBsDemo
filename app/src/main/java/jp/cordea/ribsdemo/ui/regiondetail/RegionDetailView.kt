@@ -4,12 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.viewpager.widget.ViewPager
 import jp.cordea.ribsdemo.R
+import jp.cordea.ribsdemo.api.response.Region
 
 class RegionDetailView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
 ) : ViewPager(context, attrs), RegionDetailInteractor.RegionDetailPresenter {
-
     override fun onFinishInflate() {
         super.onFinishInflate()
 
@@ -20,6 +20,10 @@ class RegionDetailView @JvmOverloads constructor(
 
     override fun setAdapter(adapter: RegionDetailPagerAdapter) {
         this.adapter = adapter
+    }
+
+    override fun showItems(items: Collection<Region>) {
+        (adapter as RegionDetailPagerAdapter).items = items.toList()
     }
 
     override fun moveTo(position: Int) {
